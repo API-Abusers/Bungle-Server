@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Serverside for Bungle",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/app.js --exec  \"npm run lint && node\"",
+    "lint": "eslint src/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/API-Abusers/Bungle-Server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/API-Abusers/Bungle-Server/issues"
+  },
+  "homepage": "https://github.com/API-Abusers/Bungle-Server#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4",
+    "eslint": "^6.6.0",
+    "eslint-plugin-vue": "^6.0.1"
+  }
+}
