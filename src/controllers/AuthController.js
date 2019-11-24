@@ -11,21 +11,23 @@ module.exports = {
             if(err) console.log(err)
             if(!user)
             {
+                res.send({
+                    message: `Hello ${req.body.username}, you have been registered. Not that anything has really changed.`
+                })
                 const newUser = new Users({
                     username: req.body.username,
                     email : req.body.email,
                     password : req.body.password
                 })
                 newUser.save().catch(err => console.log(err));
-                res.send({
-                    message: `Hello ${req.body.username}, you have been registered. Not that anything has really changed.`
-                })
+                console.log(`success ${req.body.username} ${req.body.email}`)
             }
             else
             {
                 res.send({
                     message: `This username has already been taken. Try another one.`
                 })
+                console.log(`failure`)
             }
         })
     }
