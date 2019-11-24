@@ -20,12 +20,15 @@ module.exports = {
                     password : req.body.password
                 })
                 newUser.save().catch(err => console.log(err));
+<<<<<<< HEAD
                 console.log(`success ${req.body.username} ${req.body.email}`)
+=======
+>>>>>>> d2029e72427ac5523083634cb227c1d6c36419c5
             }
             else
             {
                 res.send({
-                    message: `This username has already been taken. Try another one.`
+                    message: `This username ${req.body.username} has already been taken. Try another one.`
                 })
                 console.log(`failure`)
             }
