@@ -4,7 +4,7 @@ mongoose.connect('mongodb://localhost/bungleDB', {useNewUrlParser: true});
 const Users = require('../models/users.js')
 
 module.exports = {
-    register (req, res) {
+    async register (req, res) {
         Users.findOne({
             username: req.body.username
         }, (err, user) => {
@@ -20,10 +20,7 @@ module.exports = {
                     password : req.body.password
                 })
                 newUser.save().catch(err => console.log(err));
-<<<<<<< HEAD
                 console.log(`success ${req.body.username} ${req.body.email}`)
-=======
->>>>>>> d2029e72427ac5523083634cb227c1d6c36419c5
             }
             else
             {
@@ -31,6 +28,25 @@ module.exports = {
                     message: `This username ${req.body.username} has already been taken. Try another one.`
                 })
                 console.log(`failure`)
+            }
+        })
+    },
+    async login (req, res) {
+        Users.findOne({
+            username: req.body.username,
+            password: req.body.password
+        }, (err, user) => {
+            if(err) console.log(err)
+            if(!user)
+            {
+                res.status(403).send({ error: 'Incorrect username or password.'})
+            }
+            else
+            {
+                res.send({
+                    message: `Welcome ${req.body.username}! The test was successful.`
+                })
+                console.log(`login successful`)
             }
         })
     }
