@@ -3,6 +3,15 @@ mongoose.connect('mongodb://localhost/bungleDB', {useNewUrlParser: true});
 
 const Users = require('../models/users.js')
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
+
+function jwtSignUser (user) {
+    const ONE_WEEK = 60 * 60 * 24 * 7
+    return jwt.sign(user, config.authentication.jwtSecret, {
+        expiresIn: ONE_WEEK
+    })
+}
 
 module.exports = {
     async register (req, res) {
@@ -18,8 +27,11 @@ module.exports = {
                     password : bcrypt.hashSync(req.body.password, 10)
                 })
                 newUser.save().catch(err => console.log(err));
+                const userJson = user.toJSON()
                 res.send({
-                    message: `Hello ${req.body.username}, you have been registered. Not that anything has really changed.`
+                    message: `Hello ${req.body.username}, you have been registered. Not that anything has really changed.`,
+                    user: userJson,
+                    token: jwtSignUser(userJson)
                 })
                 console.log(`success ${req.body.username} ${req.body.email}`)
             }
@@ -47,8 +59,11 @@ module.exports = {
             }
             else
             {
+                const userJson = user.toJSON()
                 res.send({
                     message: `Welcome ${req.body.username}! The test was successful.`,
+                    user: userJson,
+                    token: jwtSignUser(userJson)
                 })
                 console.log(`login successful`)
             }
