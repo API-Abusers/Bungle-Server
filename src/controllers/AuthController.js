@@ -27,7 +27,7 @@ module.exports = {
                     password : bcrypt.hashSync(req.body.password, 10)
                 })
                 newUser.save().catch(err => console.log(err));
-                const userJson = user.toJSON()
+                const userJson = newUser.toJSON()
                 res.send({
                     message: `Hello ${req.body.username}, you have been registered. Not that anything has really changed.`,
                     user: userJson,

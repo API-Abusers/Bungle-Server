@@ -17,7 +17,7 @@ module.exports = {
             {
                 case 'email': res.status(400).send({ error: 'Invalid email address.'})
                 break;
-                case 'password': res.status(400).send({ error: 'Your password must be 6-30 characters long.'})
+                case 'password': res.status(400).send({ error: 'Password must be 6-30 characters.'})
                 break;
                 case 'username': res.status(400).send({ error: 'Invalid username.'})
                 break;
